@@ -129,7 +129,7 @@ public class SinkConfiguration {
 
     @Bean
     PdxSerializer pdxSerializer() {
-        return new ReflectionBasedAutoSerializer("io.pivotal.scs.demo.model.geode.pdx.*");
+        return new ReflectionBasedAutoSerializer("com.example.springoneplatform.scs.demo.model.pdx.*");
     }
 
     @Bean
