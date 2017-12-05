@@ -8,4 +8,5 @@ create region --name=item --type=PARTITION --skip-if-exists
 
 query --query="select * from /customer"
 query --query="select * from /customerOrder"
+query --query="select value.itemSet.toString from /customerOrder.entrySet"
 query --query="select * from /item"
