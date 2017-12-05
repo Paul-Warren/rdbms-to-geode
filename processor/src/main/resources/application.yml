@@ -22,7 +22,9 @@ spring:
           consumer:
             concurrency: 2
             maxAttempts: 1
-          group: geode-sink
+          group: jdbc-event-processor
+          destination: jdbc-event
+        output:
           destination: jdbc-event-result
           binder: rabbit
       rabbit:
