@@ -21,11 +21,10 @@ spring:
         input:
           consumer:
             concurrency: 2
+            maxAttempts: 1
           group: geode-sink
           destination: jdbc-event-result
           binder: rabbit
-          consumer:
-            maxAttempts: 1
       rabbit:
         bindings:
           input:
