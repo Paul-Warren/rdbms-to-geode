@@ -1,6 +1,7 @@
 start locator --name=locator
-configure pdx --auto-serializable-classes=io\.pivotal\.scs\.demo\.model\.geode\.pdx\.* --read-serialized=true
+configure pdx --auto-serializable-classes=com\.example\.springoneplatform\.scs\.demo\.model\.pdx\.* --read-serialized=true
 start server --name=server
+
 create region --name=customer --type=PARTITION --skip-if-exists
 create region --name=customerOrder --type=PARTITION --skip-if-exists
 create region --name=item --type=PARTITION --skip-if-exists

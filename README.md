@@ -41,8 +41,8 @@ This demo requires [PCF Dev](https://docs.pivotal.io/pcf-dev/index.html) and [Ap
 
 ## Running the demo
 ### Insert initial data
-1. Run [schema.sql](./demo-steps/mysql/schema.sql) to create tables
-1. Run [data.sql](./demo-steps/mysql/data.sql) to insert `CUSTOMER`, `ITEM`, `CUSTOMER_ORDERS`, and `ORDER_ITEM` rows
+1. Run [schema.sql](demo-steps/mysql/1_create_schema.sql) to create tables
+1. Run [data.sql](demo-steps/mysql/2_initial-data.sql) to insert `CUSTOMER`, `ITEM`, `CUSTOMER_ORDERS`, and `ORDER_ITEM` rows
 1. Start a `gfsh` terminal and connect to the locator
     ```
     connect
@@ -56,11 +56,13 @@ loaded into Geode
     ```
 
 ### Trigger a data change
-1. Run [trigger.sql](./demo-steps/mysql/trigger.sql) to create the triggers that will insert `DB_EVENT` rows 
+1. Run [trigger.sql](demo-steps/mysql/4_create_triggers.sql) to create the triggers that will insert `DB_EVENT` rows 
 when data in other tables is inserted, updated, or deleted
-1. Run [delta-data.sql](./demo-steps/mysql/delta-data.sql) to do the following:
+1. Run [delta-data.sql](demo-steps/mysql/5_update_data.sql) to do the following:
     1. `DELETE` an `ORDER_ITEM` from `order1`
     1. `DELETE` a `CUSTOMER_ORDER` from `customer1` (will `DELETE` all `ORDER_ITEM` rows for `order2` first)
+    1. `INSERT` a `ITEM` (will add a new item (Stapler) that can be included in an order)
+    1. `INSERT` a `CUSTOMER_ORDER` and `ORDER_ITEM (will create an order for the new item created above)
 1. Query the regions again to see that the data that was deleted from the MySQL database was also deleted from Geode
     ```
     query --query="select * from /customer"
