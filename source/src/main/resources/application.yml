@@ -1,0 +1,29 @@
+jdbc:
+  query: |
+    SELECT CONCAT(SRC_GROUP, '', '', SRC_KEY) AS GROUPKEY,
+                     SRC_GROUP, SRC_KEY,
+                     ACTION_CODE,
+                     MAX(EVENT_TS) AS EVENT_TS
+                     FROM DB_EVENTS
+                     WHERE STATUS_CODE = '0'
+                     GROUP BY SRC_GROUP, SRC_KEY, ACTION_CODE
+
+  update: |
+    UPDATE DB_EVENTS
+    SET STATUS_CODE='1'
+    WHERE CONCAT(SRC_GROUP, '', '', SRC_KEY) IN (:GROUPKEY)
+  split: true
+  max-rows-per-poll: 300
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          producer:
+            requiredGroups: jdbc-event-processor
+          destination: jdbc-event
+
+management:
+  security:
+    enabled: false

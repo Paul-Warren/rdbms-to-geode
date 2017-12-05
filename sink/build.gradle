@@ -1,0 +1,31 @@
+group = 'com.hcsc.springoneplatform.scs'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':model')
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.cloud:spring-cloud-stream'
+    compile 'org.springframework.integration:spring-integration-java-dsl'
+    compile 'org.springframework.integration:spring-integration-jdbc'
+//    compile group: 'org.springframework.integration', name: 'spring-integration-java-dsl', version: '1.2.3.RELEASE'
+    compile group: 'org.springframework.cloud.stream.app', name: 'app-starters-core-dependencies', version: "${springCloudStreamVersion}", ext: 'pom'
+    compile "org.springframework.cloud.stream.app:spring-cloud-starter-stream-source-jdbc:${springCloudStreamVersion}"
+    compile "org.springframework.cloud.stream.app:app-starters-core-dependencies:${springCloudStreamVersion}"
+    compile "org.springframework.cloud:spring-cloud-stream-binder-rabbit:${springCloudStreamVersion}"
+    compile 'org.springframework.boot:spring-boot-starter-cloud-connectors'
+
+    compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
+    compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
+
+    compile "org.apache.geode:geode-core:${geodeVersion}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

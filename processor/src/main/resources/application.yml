@@ -1,0 +1,29 @@
+customerSql: |
+  SELECT *
+  FROM CUSTOMER
+  WHERE ID = :srcKey
+
+itemSql: |
+  SELECT *
+  FROM ITEM
+  WHERE ID = :srcKey
+
+customerOrderSql: |
+  SELECT *
+  FROM CUSTOMER_ORDER INNER JOIN ORDER_ITEM
+  ON ID = CUSTOMER_ORDER_ID
+  WHERE ID = :srcKey
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          group: jdbc-event-processor
+          destination: jdbc-event
+        output:
+          destination: jdbc-event-result
+
+management:
+  security:
+    enabled: false

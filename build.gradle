@@ -1,0 +1,44 @@
+group = 'com.hcsc.springoneplatform.scs'
+version = '0.0.1-SNAPSHOT'
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+ext {
+	springBootVersion = '1.5.9.RELEASE'
+	springCloudVersion = 'Edgware.RELEASE'
+	springCloudStreamVersion = "1.2.0.RELEASE"
+	geodeVersion = '1.3.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+allprojects {
+	apply plugin: 'io.spring.dependency-management'
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+		}
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	sourceCompatibility = 1.8
+
+	repositories {
+		mavenLocal()
+	}
+}

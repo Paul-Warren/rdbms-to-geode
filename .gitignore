@@ -1,0 +1,8 @@
+*.jar
+*.original
+.idea/*
+.gradle/*
+build/*
+*/build/*
+*.iml
+gradlew/**

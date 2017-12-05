@@ -1,0 +1,25 @@
+path: build/libs/processor-0.0.1-SNAPSHOT.jar
+port: 8888
+services:
+- mysql
+- rabbitmq
+env:
+    spring.cloud.stream.rabbit.bindings.input.consumer.autoBindDlq: true
+    spring.cloud.stream.rabbit.bindings.input.consumer.republishToDlq: true
+    spring.cloud.stream.rabbit.bindings.input.consumer.requeueRejected: false
+    spring.cloud.stream.rabbit.bindings.output.producer.autoBindDlq: true
+    spring.cloud.stream.bindings.input.binder: rabbit
+    spring.cloud.stream.bindings.input.consumer.concurrency: 10
+    spring.cloud.stream.bindings.input.consumer.maxAttempts: 1
+    spring.cloud.stream.bindings.output.binder: rabbit
+    spring.datasource.tomcat.min-idle: 10
+    spring.datasource.tomcat.max-idle: 100
+    spring.datasource.tomcat.max-wait: 3000
+applications:
+- name: jdbc-event-processor-app-dev
+  host: jdbc-event-processor-app-dev
+  memory: 512M
+
+
+
+

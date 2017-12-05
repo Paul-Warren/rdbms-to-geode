@@ -1,0 +1,12 @@
+path: build/libs/source.jar
+port: 8888
+memory: 512M
+services:
+- mysql
+- rabbitmq
+env:
+    spring.cloud.stream.rabbit.bindings.output.producer.autoBindDlq: true
+    spring.cloud.stream.bindings.output.binder: rabbit
+applications:
+- name: jdbc-event-source-app-dev
+  host: jdbc-event-source-app-dev

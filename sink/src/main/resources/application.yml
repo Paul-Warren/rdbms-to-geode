@@ -1,0 +1,20 @@
+
+spring:
+  cloud:
+    stream:
+      instance-count: 1
+      bindings:
+        input:
+          consumer:
+            concurrency: 2
+          group: geode-sink
+          destination: jdbc-event-result
+
+geode:
+  locator: 192.168.2.118
+  port: 10334
+
+aggregator:
+  groupCount: 2
+  batchSize: 1000
+  batchTimeout: 1000
