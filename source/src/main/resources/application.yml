@@ -22,7 +22,12 @@ spring:
         output:
           producer:
             requiredGroups: jdbc-event-processor
+            autoBindDlq: true
           destination: jdbc-event
+      rabbit:
+        bindings:
+          output:
+            binder: rabbit
 
 management:
   security:

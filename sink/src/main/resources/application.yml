@@ -1,4 +1,3 @@
-
 spring:
   cloud:
     stream:
@@ -9,9 +8,24 @@ spring:
             concurrency: 2
           group: geode-sink
           destination: jdbc-event-result
+          binder: rabbit
+          consumer:
+            maxAttempts: 1
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              autoBindDlq: true
+              republishToDlq: true
+              requeueRejected: false
+  datasource:
+    tomcat:
+      max-wait:  300
+      min-idle: 10
+      max-idle: 100
 
 geode:
-  locator: 192.168.2.118
+  locator: 172.20.7.30
   port: 10334
 
 aggregator:

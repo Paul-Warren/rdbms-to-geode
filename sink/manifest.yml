@@ -3,15 +3,6 @@ port: 8888
 memory: 1024M
 services:
 - rabbitmq
-env:
-    spring.cloud.stream.rabbit.bindings.input.consumer.autoBindDlq: true
-    spring.cloud.stream.rabbit.bindings.input.consumer.republishToDlq: true
-    spring.cloud.stream.rabbit.bindings.input.consumer.requeueRejected: false
-    spring.cloud.stream.bindings.input.binder: rabbit
-    spring.cloud.stream.bindings.input.consumer.maxAttempts: 1
-    spring.datasource.tomcat.min-idle: 10
-    spring.datasource.tomcat.max-idle: 100
-    spring.datasource.tomcat.max-wait: 3000
 applications:
 - name: geode-sink-app-dev
   host: geode-sink-app-dev
